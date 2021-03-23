@@ -4,7 +4,15 @@
 
 # Home page
 GET        /                             controllers.Application.index
+GET        /increment                    controllers.Application.increment
+GET        /incrementSocket              controllers.Application.incrementSocket
 
-# Prefix must match `play.assets.urlPrefix`
+
+
+
+
+
+
+# DONT DELETE
 GET        /assets/*file                 controllers.Assets.at(file)
 GET        /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)
