@@ -1,6 +1,8 @@
 package actors
 
 import akka.actor.Actor
+import akka.actor.ActorRef
+import models.CountingModel
 
 class CountingManager extends Actor {
 private var clients = List.empty[ActorRef]
@@ -10,13 +12,13 @@ private var clients = List.empty[ActorRef]
     case NewClient(client) => clients ::= client
     case IncrementCount() => {
         CountingModel.increment()
-        for (c <- clients) c ! ChatActor.SendMessage(CountingModel.getCount())
+        for (c <- clients) c ! CountingActor.SendCount(CountingModel.getCount().toString())
     }
-    case m => println("Unhandled message in ChatManager: " + m)
+    case m => println("Unhandled message in CountManager: " + m)
   }
 }
 
 object CountingManager {
-  case class NewChatter(client: ActorRef)
+  case class NewClient(client: ActorRef)
   case class IncrementCount()
 }

@@ -18,11 +18,11 @@ class Application @Inject()(cc: ControllerComponents)(implicit system: ActorSyst
 
   val manager = system.actorOf(Props[CountingManager], "Manager")
 
-  def index = Action {
+  def index = Action { implicit request =>
     Ok(views.html.index())
   }
 
-  def increment = Action {
+  def increment = Action { implicit request =>
     CountingModel.increment()
     Ok(CountingModel.getCount().toString())
   } 
