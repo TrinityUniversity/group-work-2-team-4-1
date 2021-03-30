@@ -2,16 +2,16 @@
 
 @main("Play with Scala.js") {
 
-  <h2> Websocket call </h2>
+  <!-- <h2> Websocket call </h2>
   <p>count: <span id="count">0</span></p>
 
-  <button id="incrementButton">Increment Count</button>
+  <button id="incrementButton">Increment Count</button>-->
 
-  <input type="hidden" id="count-route" value="@routes.Application.incrementSocket.absoluteURL()">
+  <input type="hidden" id="count-route" value="@routes.Application.incrementSocket.absoluteURL()"> 
+  <div id="react-route"></div>
 
   <script src="@routes.Assets.versioned("javascript/counting.js")"></script>
 
-  
 
     
 }

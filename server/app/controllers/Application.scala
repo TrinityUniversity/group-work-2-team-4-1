@@ -18,6 +18,10 @@ class Application @Inject()(cc: ControllerComponents)(implicit system: ActorSyst
 
   val manager = system.actorOf(Props[CountingManager], "Manager")
 
+  def react = Action { implicit request =>
+    Ok(views.html.react())
+  }
+
   def index = Action { implicit request =>
     Ok(views.html.index())
   }

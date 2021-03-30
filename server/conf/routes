@@ -7,6 +7,8 @@ GET        /                             controllers.Application.index
 GET        /increment                    controllers.Application.increment
 GET        /incrementSocket              controllers.Application.incrementSocket
 
+GET        /react                        controllers.Application.react
+
 
 
 
