@@ -11,7 +11,8 @@ GET        /react                        controllers.Application.react
 
 
 
-
+GET        /relationship                 controllers.Relationship.load
+GET        /getUsers                     controllers.Relationship.users
 
 
 
