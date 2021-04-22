@@ -14,7 +14,8 @@ GET        /react                        controllers.Application.react
 GET        /relationship                 controllers.Relationship.load
 GET        /getUsers                     controllers.Relationship.users
 
-
+GET         /message                      controllers.Messages.index
+POST        /messageshow                  controllers.Messages.load
 
 # DONT DELETE
 GET        /assets/*file                 controllers.Assets.at(file)
