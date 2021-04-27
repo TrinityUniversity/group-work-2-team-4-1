@@ -5,7 +5,19 @@ import org.scalajs.dom.document
 import scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 import org.scalajs.dom.html
-import models
+import shared.ReadAndWrites._
+import shared.OneMessage
+import play.api.libs.json.JsError
+import org.scalajs.dom.experimental.Headers
+import org.scalajs.dom.experimental.Fetch
+import org.scalajs.dom.experimental.HttpMethod
+import org.scalajs.dom.experimental.RequestInit
+import play.api.libs.json.Json
+import play.api.libs.json.JsSuccess
+import play.api.libs.json.Writes
+import play.api.libs.json.Reads
+import scala.scalajs.js.Thenable.Implicits._
+import scala.concurrent.ExecutionContext
 
 object ScalaJSExample {
 
@@ -30,8 +42,8 @@ object ScalaJSExample {
   def updateMessage(): Unit = {
     val author = document.getElementById("messageAuthor").asInstanceOf[html.Input].value
     val message = document.getElementById("messageMessage").asInstanceOf[html.Input].value
-    val data = models.OneMessage(author, message)
-    fetch(messageRoute, csrfToken, data, (bool: Boolean) => {
+    val data = OneMessage(author, message)
+    fetch(messageRoute, data, (bool: Boolean) => {
       if(bool) {
         document.getElementById("messageAuthor").asInstanceOf[html.Input].value = author
         document.getElementById("messageMessage").asInstanceOf[html.Input].value = message
@@ -49,7 +61,8 @@ object ScalaJSExample {
   def fetch[A, B](url: String, data: A, success: B => Unit, error: JsError => Unit)(implicit writes: Writes[A], reads: Reads[B]): Unit = {
     val hs = new Headers()
     hs.set("Content-Type", "application/json")
-    hs.set("Csrf-Token", dom.document.getElementsByTagName("body").apply(0).getAttribute("data-token"))
+    //hs.set("Csrf-Token", dom.document.getElementsByTagName("body").apply(0).getAttribute("data-token"))
+    hs.set("Csrf-Token", csrfToken)
     Fetch.fetch(
       url,
       new RequestInit {

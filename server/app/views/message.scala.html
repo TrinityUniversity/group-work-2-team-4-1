@@ -3,20 +3,18 @@
 @main("Message") {
 
     <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
-    <input type="hidden" id="messageRoute" value="@routes.Message.load">
+    <input type="hidden" id="messageRoute" value="@routes.Messages.load">
 
     
     <h2 id="messageAuthor">@Author</h2>
     <h2 id="messageMessage">@Message</h2>
 
-    <form method="POST" action="/messageShow">
         <h3>New Author</h3>
         <input type="text" id="message-author"> 
         <br>
         <h3>New Message</h3>
         <input type="text" id="message-route">
         <br>
-        <input type="submit">
-    </form>
+        <button type="submit" onclick="">
 
 }

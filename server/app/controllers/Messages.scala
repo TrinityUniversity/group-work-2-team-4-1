@@ -14,6 +14,7 @@ class Messages @Inject()(cc: ControllerComponents) extends AbstractController(cc
     def load = Action { implicit request =>
     // handle form data and update
     // request.data
+    println(request)
     Ok(views.html.message(author,message))
   }
   def index=Action{implicit request=>
