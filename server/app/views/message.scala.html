@@ -1,4 +1,4 @@
-@(Author: String, Message: String)(implicit request: RequestHeader, flash: Flash)
+@()(implicit request: RequestHeader, flash: Flash)
 
 @main("Message") {
 
@@ -6,8 +6,8 @@
     <input type="hidden" id="messageRoute" value="@routes.Messages.load">
 
     
-    <h2 id="messageAuthor">@Author</h2>
-    <h2 id="messageMessage">@Message</h2>
+    <input id="messageAuthor" value="default author"></input>
+    <input id="messageMessage" value="default message"></input>
 
         <h3>New Author</h3>
         <input type="text" id="message-author"> 
@@ -15,6 +15,8 @@
         <h3>New Message</h3>
         <input type="text" id="message-route">
         <br>
-        <button type="submit" onclick="">
+        <button type="submit" onclick="updateMessage()">Send</button>
+
+        <!-- <script type="text/javascript" src="@routes.Assets.versioned("")"></script> -->
 
 }

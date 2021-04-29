@@ -40,14 +40,19 @@ object ScalaJSExample {
 
  @JSExportTopLevel("updateMessage")
   def updateMessage(): Unit = {
-    val author = document.getElementById("messageAuthor").asInstanceOf[html.Input].value
-    val message = document.getElementById("messageMessage").asInstanceOf[html.Input].value
+    val author = document.getElementById("message-author").asInstanceOf[html.Input].value
+    val message = document.getElementById("message-route").asInstanceOf[html.Input].value
     val data = OneMessage(author, message)
+    println(author)
+    println(message)
+    println(data)
     fetch(messageRoute, data, (bool: Boolean) => {
       if(bool) {
+        println("true")
         document.getElementById("messageAuthor").asInstanceOf[html.Input].value = author
         document.getElementById("messageMessage").asInstanceOf[html.Input].value = message
       } else {
+        println("false")
         document.getElementById("messageAuthor").innerHTML = "Message Update Failed"
       }
     }, e => {
@@ -55,8 +60,9 @@ object ScalaJSExample {
     })
   }
 
-
   implicit val ec = ExecutionContext.global
+  implicit val messagesReads = Json.reads[OneMessage]
+  implicit val messagesWrites = Json.writes[OneMessage]
 
   def fetch[A, B](url: String, data: A, success: B => Unit, error: JsError => Unit)(implicit writes: Writes[A], reads: Reads[B]): Unit = {
     val hs = new Headers()
