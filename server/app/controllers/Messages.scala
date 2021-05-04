@@ -15,7 +15,7 @@ class Messages @Inject()(cc: ControllerComponents) extends AbstractController(cc
     // handle form data and update
     // request.data
     println(request)
-    Ok(views.html.message())
+    Ok(Json.toJson(true))
   }
   def index=Action{implicit request=>
     Ok(views.html.message())

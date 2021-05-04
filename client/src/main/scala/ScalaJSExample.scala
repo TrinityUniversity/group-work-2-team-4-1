@@ -18,6 +18,10 @@ import play.api.libs.json.Writes
 import play.api.libs.json.Reads
 import scala.scalajs.js.Thenable.Implicits._
 import scala.concurrent.ExecutionContext
+import playscala.ButtonComponent
+
+import slinky.web.ReactDOM
+import slinky.web.html.h1
 
 object ScalaJSExample {
 
@@ -25,6 +29,10 @@ object ScalaJSExample {
     // dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
     for(x <- 1 to 10) println(x)
 
+    ReactDOM.render(
+        ButtonComponent(),
+        dom.document.getElementById("react-root")
+    )
 
   }
 
@@ -77,6 +85,7 @@ object ScalaJSExample {
         body = Json.toJson(data).toString
       }
     ).flatMap(_.text()).map { res =>
+      println(res)
       Json.fromJson[B](Json.parse(res)) match {
         case JsSuccess(ret, path) => 
           success(ret)
